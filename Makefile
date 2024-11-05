@@ -6,7 +6,7 @@
 #    By: tnedel <tnedel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/24 19:27:15 by tnedel            #+#    #+#              #
-#    Updated: 2024/11/04 10:57:03 by tnedel           ###   ########.fr        #
+#    Updated: 2024/11/05 17:35:57 by tnedel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ NAME	= philo
 SRC_DIR	= srcs
 OBJ_DIR = obj
 SRC		= $(SRC_DIR)/philo.c $(SRC_DIR)/error_handler.c \
-			$(SRC_DIR)/utils.c $(SRC_DIR)/utils2.c
+			$(SRC_DIR)/utils.c $(SRC_DIR)/utils2.c \
+			$(SRC_DIR)/philo_action.c
 SRC_OBJ	= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)

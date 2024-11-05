@@ -6,7 +6,7 @@
 /*   By: tnedel <tnedel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 09:37:12 by tnedel            #+#    #+#             */
-/*   Updated: 2024/11/04 15:15:10 by tnedel           ###   ########.fr       */
+/*   Updated: 2024/11/05 18:12:49 by tnedel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 void	*survive(void *arg)
 {
+	long	time_elapsed;
 	t_philo	*tphilo;
 
 	tphilo = arg;
 //	sync_threads(tphilo->master);
 //	printf("i'm %i and my id : %i\n", tphilo->num, (int)tphilo->id);
-	usleep(200000);
-	pthread_mutex_lock(&tphilo->master->pmutex);
-	if (ft_gettime(&tphilo->master->time_elapsed, tphilo->master->start_time))
-		return ((void *)EXIT_FAILURE);
-	pthread_mutex_unlock(&tphilo->master->pmutex);
-	print_mess(" died\n", tphilo->master->time_elapsed, tphilo);
+	eat(tphilo, tphilo->master, &time_elapsed);
+//	pthread_mutex_lock(&tphilo->master->pmutex);
+//	if (ft_gettime(&time_elapsed, tphilo->master->start_time))
+//		return ((void *)EXIT_FAILURE);
+//	pthread_mutex_unlock(&tphilo->master->pmutex);
+//	print_mess(" died\n", time_elapsed, tphilo);
 	return (NULL);
 }
 

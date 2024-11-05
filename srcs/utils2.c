@@ -6,7 +6,7 @@
 /*   By: tnedel <tnedel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 11:38:07 by tnedel            #+#    #+#             */
-/*   Updated: 2024/11/04 13:48:14 by tnedel           ###   ########.fr       */
+/*   Updated: 2024/11/05 17:10:35 by tnedel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	set_up_master(t_data *new, char **args)
 	new->nb_philo = ft_atol(args[1]);
 	gettimeofday(&start, NULL);
 	new->start_time = convert_msec(start);
-	new->time_elapsed = 0;
 	new->time_to_die = ft_atol(args[2]);
 	new->time_to_eat = ft_atol(args[3]);
 	new->time_to_sleep = ft_atol(args[4]);
@@ -49,6 +48,3 @@ void	destroy_mutex(t_data *master)
 }
 
 //void	sync_threads(t_data *master)
-//{
-	
-//}

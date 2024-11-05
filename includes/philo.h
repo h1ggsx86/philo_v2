@@ -6,7 +6,7 @@
 /*   By: tnedel <tnedel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 09:37:30 by tnedel            #+#    #+#             */
-/*   Updated: 2024/11/04 12:39:35 by tnedel           ###   ########.fr       */
+/*   Updated: 2024/11/05 18:03:50 by tnedel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ typedef	struct s_data
 {
 	int				nb_philo;
 	long			start_time;
-	long			time_elapsed;
 	long			time_to_eat;
 	long			time_to_die;
 	long			time_to_sleep;
+	t_mutex			tmutex;
 	t_mutex			pmutex;
 	struct s_philo 	*tphilo;
 }					t_data;
@@ -54,5 +54,6 @@ void	print_mess(char *s, int curtime, t_philo *tphilo);
 void	usage_mess(void);
 void	destroy_mutex(t_data *master);
 void	set_up_master(t_data *new, char **args);
+void	eat(t_philo *tphilo, t_data *master, long *time_elapsed);
 
 #endif
