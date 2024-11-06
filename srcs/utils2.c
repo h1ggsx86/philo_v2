@@ -6,7 +6,7 @@
 /*   By: tnedel <tnedel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 11:38:07 by tnedel            #+#    #+#             */
-/*   Updated: 2024/11/05 17:10:35 by tnedel           ###   ########.fr       */
+/*   Updated: 2024/11/06 14:41:04 by tnedel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,24 @@ void	print_mess(char *s, int curtime, t_philo *tphilo)
 	pthread_mutex_unlock(&tphilo->master->pmutex);
 }
 
-void	set_up_master(t_data *new, char **args)
-{
-	struct timeval	start;
-
-	new->nb_philo = ft_atol(args[1]);
-	gettimeofday(&start, NULL);
-	new->start_time = convert_msec(start);
-	new->time_to_die = ft_atol(args[2]);
-	new->time_to_eat = ft_atol(args[3]);
-	new->time_to_sleep = ft_atol(args[4]);
-	new->tphilo = NULL;
-	pthread_mutex_init(&new->pmutex, NULL);
-}
-
 void	destroy_mutex(t_data *master)
 {
 	int	i;
 
 	i = 0;
 	while (i < master->nb_philo)
-		pthread_mutex_destroy(&master->tphilo[i++].fmutex);
+		pthread_mutex_destroy(&master->forks[i++].fmutex);
 }
 
-//void	sync_threads(t_data *master)
+void	sync_threads(t_data *master)
+{
+	int	i;
+
+	i = 0;
+	while (i < master->nb_philo)
+	{
+		if (master->tphilo[i].id != 0)
+			i++;
+		usleep(1);
+	}
+}
