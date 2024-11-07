@@ -6,7 +6,7 @@
 /*   By: tnedel <tnedel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:01:55 by tnedel            #+#    #+#             */
-/*   Updated: 2024/11/06 14:43:25 by tnedel           ###   ########.fr       */
+/*   Updated: 2024/11/07 11:25:40 by tnedel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	set_up_master(t_data *new, char **args)
 	new->time_to_sleep = ft_atol(args[4]);
 	new->tphilo = NULL;
 	pthread_mutex_init(&new->pmutex, NULL);
-	pthread_mutex_init(&new->tmutex, NULL);
 	set_fork(new, new->nb_philo);
 	return (EXIT_SUCCESS);
 }
@@ -51,14 +50,13 @@ void	set_tphilo(t_data *master)
 void	set_fork(t_data *master, int nb_philo)
 {
 	int		i;
-	t_fork	*forks;
+	t_mutex	*forks;
 
-	forks = malloc(sizeof(*forks) * nb_philo);
+	forks = malloc(sizeof(t_mutex) * nb_philo);
 	i = 0;
 	while (i < nb_philo)
 	{
-		forks[i].id = i + 1;
-		pthread_mutex_init(&forks[i].fmutex, NULL);
+		pthread_mutex_init(&forks[i], NULL);
 		i++;
 	}
 	master->forks = forks;

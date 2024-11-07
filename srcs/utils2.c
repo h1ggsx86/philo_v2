@@ -6,22 +6,24 @@
 /*   By: tnedel <tnedel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 11:38:07 by tnedel            #+#    #+#             */
-/*   Updated: 2024/11/06 14:41:04 by tnedel           ###   ########.fr       */
+/*   Updated: 2024/11/07 14:30:15 by tnedel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print_mess(char *s, int curtime, t_philo *tphilo)
+void	print_mess(char *s, int philo, t_data *master)
 { 
-//	printf("\n[DEBUG] ------- pmutex : %p\n", &tphilo->watcher->pmutex);
-//	printf("[DEBUG] ------- watcher : %p\n", tphilo->watcher);
-	pthread_mutex_lock(&tphilo->master->pmutex);
-	ft_putnbr_fd(curtime, 1);
+	long	time_elapsed;
+
+	time_elapsed = 0;
+	pthread_mutex_lock(&master->pmutex);
+	ft_gettime(&time_elapsed, master->start_time);
+	ft_putnbr_fd(time_elapsed, 1);
 	ft_putstr_fd("\t", 1);
-	ft_putnbr_fd(tphilo->num, 1);
+	ft_putnbr_fd(philo, 1);
 	ft_putstr_fd(s, 1);
-	pthread_mutex_unlock(&tphilo->master->pmutex);
+	pthread_mutex_unlock(&master->pmutex);
 }
 
 void	destroy_mutex(t_data *master)
@@ -30,7 +32,7 @@ void	destroy_mutex(t_data *master)
 
 	i = 0;
 	while (i < master->nb_philo)
-		pthread_mutex_destroy(&master->forks[i++].fmutex);
+		pthread_mutex_destroy(&master->forks[i++]);
 }
 
 void	sync_threads(t_data *master)

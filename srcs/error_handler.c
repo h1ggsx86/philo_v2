@@ -6,7 +6,7 @@
 /*   By: tnedel <tnedel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 11:31:02 by tnedel            #+#    #+#             */
-/*   Updated: 2024/11/05 17:35:35 by tnedel           ###   ########.fr       */
+/*   Updated: 2024/11/07 11:28:31 by tnedel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	usage_mess(void)
 {
-	printf("Usage: ./philo nb_philosophers ");
-	printf("t_to_die ");
-	printf("t_to_eat ");
-	printf("t_to_sleep ");
-	printf("[nb_philosopher_eat]\n");
+	ft_putstr_fd("Usage: ./philo nb_philosophers ", 1);
+	ft_putstr_fd("t_to_die ", 1);
+	ft_putstr_fd("t_to_eat ", 1);
+	ft_putstr_fd("t_to_sleep ", 1);
+	ft_putstr_fd("[nb_philosopher_eat]\n", 1);
 }

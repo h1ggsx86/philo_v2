@@ -6,7 +6,7 @@
 /*   By: tnedel <tnedel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 09:37:12 by tnedel            #+#    #+#             */
-/*   Updated: 2024/11/06 15:47:21 by tnedel           ###   ########.fr       */
+/*   Updated: 2024/11/07 14:49:23 by tnedel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,26 @@ void	*survive(void *arg)
 
 	tphilo = arg;
 	time_elapsed = 0;
-	while (time_elapsed != 1000)
-		eat(tphilo, tphilo->master, &time_elapsed);
-//	pthread_mutex_lock(&tphilo->master->pmutex);
-//	if (ft_gettime(&time_elapsed, tphilo->master->start_time))
-//		return ((void *)EXIT_FAILURE);
-//	pthread_mutex_unlock(&tphilo->master->pmutex);
-//	print_mess(" died\n", time_elapsed, tphilo);
+	while (time_elapsed != 15)
+	{
+		philo_eat(tphilo, tphilo->master);
+		philo_sleep(tphilo->num, tphilo->master);
+		philo_think(tphilo->num, tphilo->master);
+		time_elapsed++;
+	}
 	return (NULL);
 }
 
 void	*monitoring(void *arg)
 {
+	int	i;
 	t_data	*master;
 
 	master = arg;
 	sync_threads(master);
+	i = 0;
+	while (i < 50)
+		i++;
 	return (NULL);
 }
 
@@ -91,7 +95,8 @@ int	main(int ac, char *av[])
 	if (join_philo(&master))
 		return (EXIT_FAILURE);
 	pthread_mutex_destroy(&master.pmutex);
-	pthread_mutex_destroy(&master.tmutex);
 	destroy_mutex(&master);
+	free(master.tphilo);
+	free(master.forks);
 	return (EXIT_SUCCESS);
 }
